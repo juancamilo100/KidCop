@@ -73,15 +73,27 @@ const NSString *kWundergroundKey = @"5afb7496f4a7ee7f";
     [self monitorSwitch];
 }
 
+- (void)startMonitoringKid {
+    [self.nearableManager startRangingForIdentifier:self.stickerId];
+    [self startSignificantUpdates];
+}
+
+- (void)stopMonitoringKid {
+    [self.nearableManager stopRangingForIdentifier:self.stickerId];
+    [self stopSignificantUpdates];
+}
+
 - (void)monitorSwitch {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     if ([self.monitoringSwitch isOn]) {
+        [self startMonitoringKid];
         self.monitoringStatusText.text = [NSString stringWithFormat:@"Currenty monitoring %@", self.kidName];
         
         [defaults setObject:@"ON" forKey:[NSString stringWithFormat:@"%@SwitchState", self.kidName]];
         
     } else {
+        [self stopMonitoringKid];
         self.monitoringStatusText.text = [NSString stringWithFormat:@"Stopped monitoring %@", self.kidName];
         
         [defaults setObject:@"OFF" forKey:[NSString stringWithFormat:@"%@SwitchState", self.kidName]];
@@ -96,10 +108,6 @@ const NSString *kWundergroundKey = @"5afb7496f4a7ee7f";
 
 -(void)triggerManager:(ESTTriggerManager *)manager
   triggerChangedState:(ESTTrigger *)trigger {
-    if ([trigger.identifier isEqualToString:@"temp trigger"]
-        && trigger.state == YES) {
-    }
-    
     if ([trigger.identifier isEqualToString:@"motion trigger"]
         && trigger.state == YES) {
         self.motionLabel.text = @"In Motion";
@@ -126,16 +134,24 @@ const NSString *kWundergroundKey = @"5afb7496f4a7ee7f";
     }
 }
 
+- (NSString *) KidMotionStatus:(ESTNearable *)nearable {
+    if (nearable.isMoving) {
+        return @"moving";
+    }
+    else {
+        return @"still";
+    }
+}
+
 - (void)nearableManager:(ESTNearableManager *)manager didRangeNearable:(ESTNearable *)nearable
 {
     double beaconTempInFahrenheit = (nearable.temperature * 1.8) + 32;
     self.tempLabel.text = [NSString stringWithFormat:@"%.1f°F", beaconTempInFahrenheit];
 
     NSString *message;
-    
     if(nearable.zone > 2)
     {
-        message = [NSString stringWithFormat:@"%@ ran away and is %@", self.kidName, [self KidWhereabouts:beaconTempInFahrenheit]];
+        message = [NSString stringWithFormat:@"%@ ran away and is %@, probably %@", self.kidName, [self KidMotionStatus:nearable], [self KidWhereabouts:beaconTempInFahrenheit]];
         self.kidStatusLabel.text = message;
     }
     else
