@@ -9,12 +9,17 @@
 /* Begin PBXBuildFile section */
 		6E208ED11C778ECD006D1479 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E208ED01C778ECD006D1479 /* main.m */; };
 		6E208ED41C778ECD006D1479 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E208ED31C778ECD006D1479 /* AppDelegate.m */; };
-		6E208ED71C778ECD006D1479 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E208ED61C778ECD006D1479 /* ViewController.m */; };
 		6E208EDA1C778ECD006D1479 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E208ED81C778ECD006D1479 /* Main.storyboard */; };
 		6E208EDC1C778ECD006D1479 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E208EDB1C778ECD006D1479 /* Assets.xcassets */; };
 		6E208EDF1C778ECD006D1479 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E208EDD1C778ECD006D1479 /* LaunchScreen.storyboard */; };
 		6E208EEA1C778ECD006D1479 /* KidCopTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E208EE91C778ECD006D1479 /* KidCopTests.m */; };
 		6E208EF51C778ECD006D1479 /* KidCopUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E208EF41C778ECD006D1479 /* KidCopUITests.m */; };
+		6E208F071C779CE1006D1479 /* Kid.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E208F061C779CE1006D1479 /* Kid.m */; };
+		6E208F0A1C779F1D006D1479 /* KidDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E208F091C779F1D006D1479 /* KidDataBase.m */; };
+		6E208F0D1C77B803006D1479 /* StatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E208F0C1C77B803006D1479 /* StatusViewController.m */; };
+		6E88DE731C8F76000059D019 /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E88DE721C8F76000059D019 /* CollectionViewCell.m */; };
+		6E88DE761C8F764B0059D019 /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E88DE751C8F764B0059D019 /* CollectionViewController.m */; };
+		944907414D53438C5DFB4A46 /* libPods-KidCop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBA6457E921D0660F98EDDBA /* libPods-KidCop.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,12 +40,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		501F56DFF7CD6F129F5157C5 /* Pods-KidCop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KidCop.release.xcconfig"; path = "Pods/Target Support Files/Pods-KidCop/Pods-KidCop.release.xcconfig"; sourceTree = "<group>"; };
 		6E208ECC1C778ECD006D1479 /* KidCop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KidCop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E208ED01C778ECD006D1479 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6E208ED21C778ECD006D1479 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6E208ED31C778ECD006D1479 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		6E208ED51C778ECD006D1479 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		6E208ED61C778ECD006D1479 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		6E208ED91C778ECD006D1479 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6E208EDB1C778ECD006D1479 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6E208EDE1C778ECD006D1479 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -51,6 +55,18 @@
 		6E208EF01C778ECD006D1479 /* KidCopUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KidCopUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E208EF41C778ECD006D1479 /* KidCopUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KidCopUITests.m; sourceTree = "<group>"; };
 		6E208EF61C778ECD006D1479 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E208F051C779CE1006D1479 /* Kid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Kid.h; sourceTree = "<group>"; };
+		6E208F061C779CE1006D1479 /* Kid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Kid.m; sourceTree = "<group>"; };
+		6E208F081C779F1D006D1479 /* KidDataBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KidDataBase.h; sourceTree = "<group>"; };
+		6E208F091C779F1D006D1479 /* KidDataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KidDataBase.m; sourceTree = "<group>"; };
+		6E208F0B1C77B803006D1479 /* StatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusViewController.h; sourceTree = "<group>"; };
+		6E208F0C1C77B803006D1479 /* StatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusViewController.m; sourceTree = "<group>"; };
+		6E88DE711C8F76000059D019 /* CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
+		6E88DE721C8F76000059D019 /* CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
+		6E88DE741C8F764B0059D019 /* CollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewController.h; sourceTree = "<group>"; };
+		6E88DE751C8F764B0059D019 /* CollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewController.m; sourceTree = "<group>"; };
+		BC7203E6D380A8EB90D55AB8 /* Pods-KidCop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KidCop.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KidCop/Pods-KidCop.debug.xcconfig"; sourceTree = "<group>"; };
+		FBA6457E921D0660F98EDDBA /* libPods-KidCop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KidCop.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				944907414D53438C5DFB4A46 /* libPods-KidCop.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +95,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		094558B86A3C5035CEBBDD83 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BC7203E6D380A8EB90D55AB8 /* Pods-KidCop.debug.xcconfig */,
+				501F56DFF7CD6F129F5157C5 /* Pods-KidCop.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		6E208EC31C778ECD006D1479 = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +111,8 @@
 				6E208EE81C778ECD006D1479 /* KidCopTests */,
 				6E208EF31C778ECD006D1479 /* KidCopUITests */,
 				6E208ECD1C778ECD006D1479 /* Products */,
+				094558B86A3C5035CEBBDD83 /* Pods */,
+				B91E8DE87078A4BCECE8B452 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,8 +131,16 @@
 			children = (
 				6E208ED21C778ECD006D1479 /* AppDelegate.h */,
 				6E208ED31C778ECD006D1479 /* AppDelegate.m */,
-				6E208ED51C778ECD006D1479 /* ViewController.h */,
-				6E208ED61C778ECD006D1479 /* ViewController.m */,
+				6E88DE741C8F764B0059D019 /* CollectionViewController.h */,
+				6E88DE751C8F764B0059D019 /* CollectionViewController.m */,
+				6E88DE711C8F76000059D019 /* CollectionViewCell.h */,
+				6E88DE721C8F76000059D019 /* CollectionViewCell.m */,
+				6E208F0C1C77B803006D1479 /* StatusViewController.m */,
+				6E208F0B1C77B803006D1479 /* StatusViewController.h */,
+				6E208F051C779CE1006D1479 /* Kid.h */,
+				6E208F061C779CE1006D1479 /* Kid.m */,
+				6E208F081C779F1D006D1479 /* KidDataBase.h */,
+				6E208F091C779F1D006D1479 /* KidDataBase.m */,
 				6E208ED81C778ECD006D1479 /* Main.storyboard */,
 				6E208EDB1C778ECD006D1479 /* Assets.xcassets */,
 				6E208EDD1C778ECD006D1479 /* LaunchScreen.storyboard */,
@@ -140,6 +176,14 @@
 			path = KidCopUITests;
 			sourceTree = "<group>";
 		};
+		B91E8DE87078A4BCECE8B452 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FBA6457E921D0660F98EDDBA /* libPods-KidCop.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -147,9 +191,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6E208EF91C778ECD006D1479 /* Build configuration list for PBXNativeTarget "KidCop" */;
 			buildPhases = (
+				04326C48B0127294714B9EBA /* Check Pods Manifest.lock */,
 				6E208EC81C778ECD006D1479 /* Sources */,
 				6E208EC91C778ECD006D1479 /* Frameworks */,
 				6E208ECA1C778ECD006D1479 /* Resources */,
+				0AA4A832C5172E2755D61F93 /* Embed Pods Frameworks */,
+				10BAE04879C7FDC6539BCB52 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -208,6 +255,11 @@
 					6E208ECB1C778ECD006D1479 = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = 7LH9M4R7DE;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					6E208EE41C778ECD006D1479 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -268,14 +320,66 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		04326C48B0127294714B9EBA /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		0AA4A832C5172E2755D61F93 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KidCop/Pods-KidCop-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		10BAE04879C7FDC6539BCB52 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KidCop/Pods-KidCop-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		6E208EC81C778ECD006D1479 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E208ED71C778ECD006D1479 /* ViewController.m in Sources */,
+				6E88DE761C8F764B0059D019 /* CollectionViewController.m in Sources */,
+				6E208F071C779CE1006D1479 /* Kid.m in Sources */,
 				6E208ED41C778ECD006D1479 /* AppDelegate.m in Sources */,
 				6E208ED11C778ECD006D1479 /* main.m in Sources */,
+				6E208F0A1C779F1D006D1479 /* KidDataBase.m in Sources */,
+				6E208F0D1C77B803006D1479 /* StatusViewController.m in Sources */,
+				6E88DE731C8F76000059D019 /* CollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,6 +516,7 @@
 		};
 		6E208EFA1C778ECD006D1479 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BC7203E6D380A8EB90D55AB8 /* Pods-KidCop.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = KidCop/Info.plist;
@@ -423,6 +528,7 @@
 		};
 		6E208EFB1C778ECD006D1479 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 501F56DFF7CD6F129F5157C5 /* Pods-KidCop.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = KidCop/Info.plist;
@@ -499,6 +605,7 @@
 				6E208EFB1C778ECD006D1479 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6E208EFC1C778ECD006D1479 /* Build configuration list for PBXNativeTarget "KidCopTests" */ = {
 			isa = XCConfigurationList;
@@ -507,6 +614,7 @@
 				6E208EFE1C778ECD006D1479 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6E208EFF1C778ECD006D1479 /* Build configuration list for PBXNativeTarget "KidCopUITests" */ = {
 			isa = XCConfigurationList;
@@ -515,6 +623,7 @@
 				6E208F011C778ECD006D1479 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

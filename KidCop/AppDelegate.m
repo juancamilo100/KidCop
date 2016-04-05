@@ -16,8 +16,23 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    [launchOptions valueForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    [[UIApplication sharedApplication]registerUserNotificationSettings:
+					[UIUserNotificationSettings
+                     settingsForTypes:UIUserNotificationTypeAlert
+                     categories:nil]];
     return YES;
+}
+
+-(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    
+//    UILocalNotification* localNotification = [[UILocalNotification alloc] init];
+//    localNotification.fireDate = [NSDate date];
+//    localNotification.alertBody = @"The bastard ran away!!!";
+//    localNotification.alertAction = @"I'll get it!";
+//    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
