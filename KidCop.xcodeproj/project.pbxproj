@@ -17,6 +17,7 @@
 		6E208F071C779CE1006D1479 /* Kid.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E208F061C779CE1006D1479 /* Kid.m */; };
 		6E208F0A1C779F1D006D1479 /* KidDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E208F091C779F1D006D1479 /* KidDataBase.m */; };
 		6E208F0D1C77B803006D1479 /* StatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E208F0C1C77B803006D1479 /* StatusViewController.m */; };
+		6E6C08521CB591E200477820 /* WeatherInspector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E6C08511CB591E200477820 /* WeatherInspector.m */; };
 		6E88DE731C8F76000059D019 /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E88DE721C8F76000059D019 /* CollectionViewCell.m */; };
 		6E88DE761C8F764B0059D019 /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E88DE751C8F764B0059D019 /* CollectionViewController.m */; };
 		944907414D53438C5DFB4A46 /* libPods-KidCop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBA6457E921D0660F98EDDBA /* libPods-KidCop.a */; };
@@ -61,6 +62,8 @@
 		6E208F091C779F1D006D1479 /* KidDataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KidDataBase.m; sourceTree = "<group>"; };
 		6E208F0B1C77B803006D1479 /* StatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusViewController.h; sourceTree = "<group>"; };
 		6E208F0C1C77B803006D1479 /* StatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusViewController.m; sourceTree = "<group>"; };
+		6E6C08501CB591E200477820 /* WeatherInspector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherInspector.h; sourceTree = "<group>"; };
+		6E6C08511CB591E200477820 /* WeatherInspector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherInspector.m; sourceTree = "<group>"; };
 		6E88DE711C8F76000059D019 /* CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
 		6E88DE721C8F76000059D019 /* CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
 		6E88DE741C8F764B0059D019 /* CollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewController.h; sourceTree = "<group>"; };
@@ -141,6 +144,8 @@
 				6E208F061C779CE1006D1479 /* Kid.m */,
 				6E208F081C779F1D006D1479 /* KidDataBase.h */,
 				6E208F091C779F1D006D1479 /* KidDataBase.m */,
+				6E6C08501CB591E200477820 /* WeatherInspector.h */,
+				6E6C08511CB591E200477820 /* WeatherInspector.m */,
 				6E208ED81C778ECD006D1479 /* Main.storyboard */,
 				6E208EDB1C778ECD006D1479 /* Assets.xcassets */,
 				6E208EDD1C778ECD006D1479 /* LaunchScreen.storyboard */,
@@ -377,6 +382,7 @@
 				6E208F071C779CE1006D1479 /* Kid.m in Sources */,
 				6E208ED41C778ECD006D1479 /* AppDelegate.m in Sources */,
 				6E208ED11C778ECD006D1479 /* main.m in Sources */,
+				6E6C08521CB591E200477820 /* WeatherInspector.m in Sources */,
 				6E208F0A1C779F1D006D1479 /* KidDataBase.m in Sources */,
 				6E208F0D1C77B803006D1479 /* StatusViewController.m in Sources */,
 				6E88DE731C8F76000059D019 /* CollectionViewCell.m in Sources */,

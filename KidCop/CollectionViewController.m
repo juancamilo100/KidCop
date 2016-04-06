@@ -25,6 +25,10 @@ static NSString * const reuseIdentifier = @"CollectionCell";
                                   @"stickerId": @"1fd629281cb5607a", //shoe
                                   @"kidImage" : @"image2.jpg"
                                   },
+                                @{@"kidName": @"Matilda",
+                                  @"stickerId": @"c4b5d987bb070c66", //chair
+                                  @"kidImage" : @"image6.jpg"
+                                  },
                                 @{@"kidName": @"Richard",
                                   @"stickerId": @"d8b23fcabf3825c6", //bed
                                   @"kidImage" : @"image3.jpg"
