@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import "Kid.h"
+#import "WeatherInspector.h"
 
 @interface StatusViewController : UIViewController
 
@@ -25,7 +26,8 @@
 @property (strong, nonatomic) NSString *stickerId;
 @property (strong, nonatomic) NSString *kidName;
 @property (strong, nonatomic) NSString *kidImage;
-@property (strong, nonatomic) NSNumber *outsideTemp;
+
+@property (strong, nonatomic) WeatherInspector *weatherRequester;
 
 - (IBAction)saveSwitchState:(id)sender;
 
