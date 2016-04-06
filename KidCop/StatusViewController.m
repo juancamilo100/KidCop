@@ -100,13 +100,13 @@
     
     if ([self.monitoringSwitch isOn]) {
         [self startMonitoringKid];
-        self.monitoringStatusLabel.text = [NSString stringWithFormat:@"Currenty monitoring %@", self.kidName];
+        self.monitoringStatusLabel.text = [NSString stringWithFormat:@"Currently monitoring %@", self.kidName];
         
         [defaults setObject:@"ON" forKey:[NSString stringWithFormat:@"%@SwitchState", self.kidName]];
         
     } else {
         [self stopMonitoringKid];
-        self.monitoringStatusLabel.text = [NSString stringWithFormat:@"Stopped monitoring %@", self.kidName];
+        self.monitoringStatusLabel.text = [NSString stringWithFormat:@"Not monitoring %@", self.kidName];
         
         [defaults setObject:@"OFF" forKey:[NSString stringWithFormat:@"%@SwitchState", self.kidName]];
     }
