@@ -25,6 +25,10 @@ static NSString * const reuseIdentifier = @"CollectionCell";
                                   @"stickerId": @"1fd629281cb5607a", //shoe
                                   @"kidImage" : @"image2.jpg"
                                   },
+                                @{@"kidName": @"Matilda",
+                                  @"stickerId": @"c4b5d987bb070c66", //chair
+                                  @"kidImage" : @"image6.jpg"
+                                  },
                                 @{@"kidName": @"Richard",
                                   @"stickerId": @"d8b23fcabf3825c6", //bed
                                   @"kidImage" : @"image3.jpg"
@@ -59,8 +63,9 @@ static NSString * const reuseIdentifier = @"CollectionCell";
         
         StatusViewController *statusViewController = (StatusViewController *)segue.destinationViewController;
         
-        statusViewController.kidName = kid.kidName;
         statusViewController.stickerId = kid.stickerId;
+        statusViewController.kidName = kid.kidName;
+        statusViewController.kidImage = kid.kidImage;
     }
 }
 
@@ -70,7 +75,6 @@ static NSString * const reuseIdentifier = @"CollectionCell";
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
    return 1;
 }
-
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return [self.kids.KidsArray count];
