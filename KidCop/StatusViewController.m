@@ -30,7 +30,12 @@ const NSString *kWundergroundKey = @"5afb7496f4a7ee7f";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
+    [self.kidImageView setImage:[UIImage imageNamed:self.kidImage]];
+    //fit the Image into the UIImageView
+    self.kidImageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.kidImageView.clipsToBounds = YES;
+    
     self.kidNameLabel.text = [NSString stringWithFormat:@"%@", self.kidName];
     
     //Make the label's corners round
@@ -160,15 +165,17 @@ const NSString *kWundergroundKey = @"5afb7496f4a7ee7f";
                                }];
     
     UIAlertAction *cancelAction = [UIAlertAction
-                                   actionWithTitle:NSLocalizedString(@"Cancel", @"Shut Up")
+                                   actionWithTitle:NSLocalizedString(@"Cancel", @"Stop Monitoring")
                                    style:UIAlertActionStyleCancel
                                    handler:^(UIAlertAction *action)
                                    {
-                                       NSLog(@"Cancel action");
+                                       [self stopMonitoringKid];
                                    }];
     
     [alertController addAction:cancelAction];
     [alertController addAction:okAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (void)nearableManager:(ESTNearableManager *)manager didRangeNearable:(ESTNearable *)nearable

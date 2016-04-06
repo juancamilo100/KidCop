@@ -59,8 +59,9 @@ static NSString * const reuseIdentifier = @"CollectionCell";
         
         StatusViewController *statusViewController = (StatusViewController *)segue.destinationViewController;
         
-        statusViewController.kidName = kid.kidName;
         statusViewController.stickerId = kid.stickerId;
+        statusViewController.kidName = kid.kidName;
+        statusViewController.kidImage = kid.kidImage;
     }
 }
 

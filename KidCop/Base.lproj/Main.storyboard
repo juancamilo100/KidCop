@@ -143,6 +143,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Jh6-Sr-AdQ"/>
                     <connections>
+                        <outlet property="kidImageView" destination="XxZ-L1-y3R" id="GU0-dF-n9N"/>
                         <outlet property="kidNameLabel" destination="Kre-40-S7b" id="pzd-Ce-mF2"/>
                         <outlet property="kidStatusLabel" destination="KKf-Lh-ZDs" id="tlO-vU-APW"/>
                         <outlet property="monitoringStatusLabel" destination="UDL-SX-8Rb" id="Kb3-Qw-ZUs"/>
