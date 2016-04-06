@@ -72,7 +72,6 @@ static NSString * const reuseIdentifier = @"CollectionCell";
    return 1;
 }
 
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return [self.kids.KidsArray count];
 }
