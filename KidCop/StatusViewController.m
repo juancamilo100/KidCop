@@ -31,6 +31,21 @@ const NSString *kWundergroundKey = @"5afb7496f4a7ee7f";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.kidImageView setImage:[UIImage imageNamed:self.kidImage]];
+    //fit the Image into the UIImageView
+    self.kidImageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.kidImageView.clipsToBounds = YES;
+    
+    self.kidNameLabel.text = [NSString stringWithFormat:@"%@", self.kidName];
+    
+    //Make the label's corners round
+    [[self.kidStatusLabel layer] setCornerRadius:8];
+    [self.kidStatusLabel.layer setMasksToBounds:YES];
+    [[self.monitoringStatusLabel layer] setCornerRadius:8];
+    [self.monitoringStatusLabel.layer setMasksToBounds:YES];
+    [[self.kidNameLabel layer] setCornerRadius:8];
+    [self.kidNameLabel.layer setMasksToBounds:YES];
+    
     // 4. Instantiate the trigger and Nearable managers & set their delegates
     self.triggerManager = [ESTTriggerManager new];
     self.triggerManager.delegate = self;
@@ -38,21 +53,13 @@ const NSString *kWundergroundKey = @"5afb7496f4a7ee7f";
     self.nearableManager.delegate = self;
     
     //You can think of a trigger as an “if” statement, and of rules as the conditions
-    ESTRule *proximityRule = [ESTProximityRule outsideRangeOfNearableIdentifier:self.stickerId];
-    
     ESTRule *motionRule = [ESTMotionRule motionStateEquals:YES
                                      forNearableIdentifier:self.stickerId];
     
-    
-    ESTTrigger *trigger1 = [[ESTTrigger alloc] initWithRules:@[proximityRule]
-                                                  identifier:@"proximity trigger"];
-    
-    ESTTrigger *trigger2 = [[ESTTrigger alloc] initWithRules:@[motionRule]
+    ESTTrigger *trigger = [[ESTTrigger alloc] initWithRules:@[motionRule]
                                                   identifier:@"motion trigger"];
     
-    
-    [self.triggerManager startMonitoringForTrigger:trigger1];
-    [self.triggerManager startMonitoringForTrigger:trigger2];
+    [self.triggerManager startMonitoringForTrigger:trigger];
     [self.nearableManager startRangingForIdentifier:self.stickerId];
     [self startSignificantUpdates];
     
@@ -73,16 +80,28 @@ const NSString *kWundergroundKey = @"5afb7496f4a7ee7f";
     [self monitorSwitch];
 }
 
+- (void)startMonitoringKid {
+    [self.nearableManager startRangingForIdentifier:self.stickerId];
+    [self startSignificantUpdates];
+}
+
+- (void)stopMonitoringKid {
+    [self.nearableManager stopRangingForIdentifier:self.stickerId];
+    [self stopSignificantUpdates];
+}
+
 - (void)monitorSwitch {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     if ([self.monitoringSwitch isOn]) {
-        self.monitoringStatusText.text = [NSString stringWithFormat:@"Currenty monitoring %@", self.kidName];
+        [self startMonitoringKid];
+        self.monitoringStatusLabel.text = [NSString stringWithFormat:@"Currenty monitoring %@", self.kidName];
         
         [defaults setObject:@"ON" forKey:[NSString stringWithFormat:@"%@SwitchState", self.kidName]];
         
     } else {
-        self.monitoringStatusText.text = [NSString stringWithFormat:@"Stopped monitoring %@", self.kidName];
+        [self stopMonitoringKid];
+        self.monitoringStatusLabel.text = [NSString stringWithFormat:@"Stopped monitoring %@", self.kidName];
         
         [defaults setObject:@"OFF" forKey:[NSString stringWithFormat:@"%@SwitchState", self.kidName]];
     }
@@ -96,10 +115,6 @@ const NSString *kWundergroundKey = @"5afb7496f4a7ee7f";
 
 -(void)triggerManager:(ESTTriggerManager *)manager
   triggerChangedState:(ESTTrigger *)trigger {
-    if ([trigger.identifier isEqualToString:@"temp trigger"]
-        && trigger.state == YES) {
-    }
-    
     if ([trigger.identifier isEqualToString:@"motion trigger"]
         && trigger.state == YES) {
         self.motionLabel.text = @"In Motion";
@@ -126,20 +141,58 @@ const NSString *kWundergroundKey = @"5afb7496f4a7ee7f";
     }
 }
 
+- (NSString *) KidMotionStatus:(ESTNearable *)nearable {
+    if (nearable.isMoving) {
+        return @"moving";
+    }
+    else {
+        return @"not moving";
+    }
+}
+
+- (void)publishAlert:(NSString *) alertName withMessage: (NSString *)message {
+    UIAlertController *alertController = [UIAlertController
+                                          alertControllerWithTitle:alertName
+                                          message:message
+                                          preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *okAction = [UIAlertAction
+                               actionWithTitle:NSLocalizedString(@"OK", @"OK action")
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction *action)
+                               {
+                                   NSLog(@"OK action");
+                               }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction
+                                   actionWithTitle:NSLocalizedString(@"Cancel", @"Stop Monitoring")
+                                   style:UIAlertActionStyleCancel
+                                   handler:^(UIAlertAction *action)
+                                   {
+                                       [self stopMonitoringKid];
+                                   }];
+    
+    [alertController addAction:cancelAction];
+    [alertController addAction:okAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
 - (void)nearableManager:(ESTNearableManager *)manager didRangeNearable:(ESTNearable *)nearable
 {
     double beaconTempInFahrenheit = (nearable.temperature * 1.8) + 32;
     self.tempLabel.text = [NSString stringWithFormat:@"%.1f°F", beaconTempInFahrenheit];
 
     NSString *message;
-    
     if(nearable.zone > 2)
     {
-        message = [NSString stringWithFormat:@"%@ ran away and is %@", self.kidName, [self KidWhereabouts:beaconTempInFahrenheit]];
+        self.kidStatusLabel.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5f];
+        message = [NSString stringWithFormat:@"%@ ran away and is %@, probably %@", self.kidName, [self KidMotionStatus:nearable], [self KidWhereabouts:beaconTempInFahrenheit]];
         self.kidStatusLabel.text = message;
     }
     else
     {
+        self.kidStatusLabel.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.5f];
         [[UIApplication sharedApplication] cancelAllLocalNotifications];
         message = self.kidName;
         message = [message stringByAppendingString:@" is with you."];
