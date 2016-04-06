@@ -8,8 +8,10 @@
 
 #import "StatusViewController.h"
 #import <CoreLocation/CoreLocation.h>
+#import <AudioToolbox/AudioToolbox.h>
 // 1. Add an import
 #import <EstimoteSDK/EstimoteSDK.h>
+
 
 //const NSString *kWundergroundKey = @"5afb7496f4a7ee7f";
 
@@ -192,6 +194,10 @@
     {
         NSString *alertTitle = @"Alert!";
         [self publishAlert:alertTitle withMessage:message];
+        
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
+        
         self.kidStatusLabel.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5f];
         message = [NSString stringWithFormat:@"%@ ran away and is %@, probably %@", self.kidName, [self KidMotionStatus:nearable], [self KidWhereabouts:beaconTempInFahrenheit]];
         self.kidStatusLabel.text = message;
