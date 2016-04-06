@@ -244,4 +244,14 @@
     [self.weatherRequester retrieveWeatherForLocation:location];
     self.outsideTempLabel.text = [NSString stringWithFormat:@"%.1f°F", [self.weatherRequester.outsideTemp doubleValue]];
 }
+
+-(void) viewWillDisappear:(BOOL)animated {
+    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+        NSLog(@"back button was pressed");
+        [self.delegate backButtonPressed:self.kidIndex withKidIndex:[self.monitoringSwitch isOn]];
+        [self.navigationController popViewControllerAnimated:NO];
+    }
+    [super viewWillDisappear:animated];
+}
+
 @end

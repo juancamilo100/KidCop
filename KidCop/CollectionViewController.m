@@ -63,6 +63,9 @@ static NSString * const reuseIdentifier = @"CollectionCell";
         
         StatusViewController *statusViewController = (StatusViewController *)segue.destinationViewController;
         
+        statusViewController.delegate = self;
+        
+        statusViewController.kidIndex = indexPath.row;
         statusViewController.stickerId = kid.stickerId;
         statusViewController.kidName = kid.kidName;
         statusViewController.kidImage = kid.kidImage;
@@ -88,7 +91,16 @@ static NSString * const reuseIdentifier = @"CollectionCell";
     imageView.frame = cell.bounds; // set the frame of the UIImageView
     imageView.clipsToBounds = YES; // do not display the image outside of view, if it has different aspect ratio
     imageView.contentMode = UIViewContentModeScaleAspectFill;
+    [imageView setTintColor:[UIColor blackColor]];
+    
+//    UIImageView *darkOverlay = [[UIImageView alloc] initWithFrame:imageView.frame];
+//    darkOverlay.frame = cell.bounds;
+//    darkOverlay.clipsToBounds = YES;
+//    [darkOverlay setTintColor:[UIColor blackColor]];
     [cell.contentView addSubview:imageView];
+//    [cell.contentView addSubview:darkOverlay];
+    
+
     
     return cell;
 }
@@ -98,6 +110,13 @@ static NSString * const reuseIdentifier = @"CollectionCell";
 
     CGFloat picDimension = self.view.frame.size.width / 2.02f;
     return CGSizeMake(picDimension, picDimension);
+}
+
+#pragma mark Status View Delegate Method
+
+- (void)backButtonPressed:(double)monitorStatus withKidIndex:(double)index
+{
+    NSLog(@"index = %.1f, monitorStatus = %.1f", monitorStatus, index);
 }
 
 @end
