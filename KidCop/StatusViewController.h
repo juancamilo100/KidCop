@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 
 @interface StatusViewController : UIViewController
 
@@ -16,7 +17,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *outsideTempLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *monitoringSwitch;
-@property (weak, nonatomic) IBOutlet UITextField *monitoringStatusText;
+@property (weak, nonatomic) IBOutlet UILabel *monitoringStatusLabel;
+@property (weak, nonatomic) IBOutlet UILabel *kidNameLabel;
 
 @property (strong, nonatomic) NSString *stickerId;
 @property (strong, nonatomic) NSString *kidName;

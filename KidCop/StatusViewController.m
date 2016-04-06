@@ -30,6 +30,16 @@ const NSString *kWundergroundKey = @"5afb7496f4a7ee7f";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    self.kidNameLabel.text = [NSString stringWithFormat:@"%@", self.kidName];
+    
+    //Make the label's corners round
+    [[self.kidStatusLabel layer] setCornerRadius:8];
+    [self.kidStatusLabel.layer setMasksToBounds:YES];
+    [[self.monitoringStatusLabel layer] setCornerRadius:8];
+    [self.monitoringStatusLabel.layer setMasksToBounds:YES];
+    [[self.kidNameLabel layer] setCornerRadius:8];
+    [self.kidNameLabel.layer setMasksToBounds:YES];
     
     // 4. Instantiate the trigger and Nearable managers & set their delegates
     self.triggerManager = [ESTTriggerManager new];
@@ -38,21 +48,13 @@ const NSString *kWundergroundKey = @"5afb7496f4a7ee7f";
     self.nearableManager.delegate = self;
     
     //You can think of a trigger as an “if” statement, and of rules as the conditions
-    ESTRule *proximityRule = [ESTProximityRule outsideRangeOfNearableIdentifier:self.stickerId];
-    
     ESTRule *motionRule = [ESTMotionRule motionStateEquals:YES
                                      forNearableIdentifier:self.stickerId];
     
-    
-    ESTTrigger *trigger1 = [[ESTTrigger alloc] initWithRules:@[proximityRule]
-                                                  identifier:@"proximity trigger"];
-    
-    ESTTrigger *trigger2 = [[ESTTrigger alloc] initWithRules:@[motionRule]
+    ESTTrigger *trigger = [[ESTTrigger alloc] initWithRules:@[motionRule]
                                                   identifier:@"motion trigger"];
     
-    
-    [self.triggerManager startMonitoringForTrigger:trigger1];
-    [self.triggerManager startMonitoringForTrigger:trigger2];
+    [self.triggerManager startMonitoringForTrigger:trigger];
     [self.nearableManager startRangingForIdentifier:self.stickerId];
     [self startSignificantUpdates];
     
@@ -88,13 +90,13 @@ const NSString *kWundergroundKey = @"5afb7496f4a7ee7f";
     
     if ([self.monitoringSwitch isOn]) {
         [self startMonitoringKid];
-        self.monitoringStatusText.text = [NSString stringWithFormat:@"Currenty monitoring %@", self.kidName];
+        self.monitoringStatusLabel.text = [NSString stringWithFormat:@"Currenty monitoring %@", self.kidName];
         
         [defaults setObject:@"ON" forKey:[NSString stringWithFormat:@"%@SwitchState", self.kidName]];
         
     } else {
         [self stopMonitoringKid];
-        self.monitoringStatusText.text = [NSString stringWithFormat:@"Stopped monitoring %@", self.kidName];
+        self.monitoringStatusLabel.text = [NSString stringWithFormat:@"Stopped monitoring %@", self.kidName];
         
         [defaults setObject:@"OFF" forKey:[NSString stringWithFormat:@"%@SwitchState", self.kidName]];
     }
@@ -139,8 +141,34 @@ const NSString *kWundergroundKey = @"5afb7496f4a7ee7f";
         return @"moving";
     }
     else {
-        return @"still";
+        return @"not moving";
     }
+}
+
+- (void)publishAlert:(NSString *) alertName withMessage: (NSString *)message {
+    UIAlertController *alertController = [UIAlertController
+                                          alertControllerWithTitle:alertName
+                                          message:message
+                                          preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *okAction = [UIAlertAction
+                               actionWithTitle:NSLocalizedString(@"OK", @"OK action")
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction *action)
+                               {
+                                   NSLog(@"OK action");
+                               }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction
+                                   actionWithTitle:NSLocalizedString(@"Cancel", @"Shut Up")
+                                   style:UIAlertActionStyleCancel
+                                   handler:^(UIAlertAction *action)
+                                   {
+                                       NSLog(@"Cancel action");
+                                   }];
+    
+    [alertController addAction:cancelAction];
+    [alertController addAction:okAction];
 }
 
 - (void)nearableManager:(ESTNearableManager *)manager didRangeNearable:(ESTNearable *)nearable
@@ -151,11 +179,13 @@ const NSString *kWundergroundKey = @"5afb7496f4a7ee7f";
     NSString *message;
     if(nearable.zone > 2)
     {
+        self.kidStatusLabel.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5f];
         message = [NSString stringWithFormat:@"%@ ran away and is %@, probably %@", self.kidName, [self KidMotionStatus:nearable], [self KidWhereabouts:beaconTempInFahrenheit]];
         self.kidStatusLabel.text = message;
     }
     else
     {
+        self.kidStatusLabel.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.5f];
         [[UIApplication sharedApplication] cancelAllLocalNotifications];
         message = self.kidName;
         message = [message stringByAppendingString:@" is with you."];
