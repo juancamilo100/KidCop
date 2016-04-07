@@ -185,6 +185,7 @@
     localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:1];
     localNotification.alertBody = message;
     localNotification.timeZone = [NSTimeZone defaultTimeZone];
+    localNotification.soundName = UILocalNotificationDefaultSoundName;
 //    localNotification.soundName = UILocalNotificationDefaultSoundName;//@"PhoneVibrating.mp3";
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 }

@@ -56,11 +56,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KidCop/StatusViewController.m"
-            timestampString = "481747136.055345"
+            timestampString = "481749710.597132"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "261"
-            endingLineNumber = "261"
+            startingLineNumber = "262"
+            endingLineNumber = "262"
             landmarkName = "-viewWillDisappear:"
             landmarkType = "5">
          </BreakpointContent>

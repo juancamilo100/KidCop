@@ -25,14 +25,22 @@
 //					[UIUserNotificationSettings
 //                     settingsForTypes: UIUserNotificationTypeAlert | UIUserNotificationTypeSound
 //                     categories:nil]];
-        if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
-            [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
-        }
+//        if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+//            [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
+//        }
     }
     
 //    if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)]){
 //        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
 //    }
+    
+    UIUserNotificationType types = (UIUserNotificationType) (UIUserNotificationTypeBadge |
+                                                             UIUserNotificationTypeSound | UIUserNotificationTypeAlert);
+    
+    UIUserNotificationSettings *mySettings =
+    [UIUserNotificationSettings settingsForTypes:types categories:nil];
+    
+    [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
     return YES;
 }
 
