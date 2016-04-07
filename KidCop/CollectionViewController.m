@@ -21,6 +21,8 @@ static NSString * const reuseIdentifier = @"CollectionCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationItem.title = @"Kids";
+    
     NSArray *kidsRemoteData = @[@{@"kidName": @"Jack",
                                   @"stickerId": @"1fd629281cb5607a", //shoe
                                   @"kidImage" : @"image2.jpg"
@@ -76,7 +78,6 @@ static NSString * const reuseIdentifier = @"CollectionCell";
     }
 }
 
-
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -85,6 +86,20 @@ static NSString * const reuseIdentifier = @"CollectionCell";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return [self.kids.KidsArray count];
+}
+
+- (void)AddImageOverlay:(NSString *)monitoringStatus to:(UIImageView *)imageView{
+    UIView *overlay = [[UIView alloc] initWithFrame:imageView.frame];
+    if([monitoringStatus isEqualToString:@"ON"])
+    {
+        [overlay setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.0]];
+        [imageView addSubview:overlay];
+    }
+    else
+    {
+        [overlay setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.65]];
+        [imageView addSubview:overlay];
+    }
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -96,14 +111,12 @@ static NSString * const reuseIdentifier = @"CollectionCell";
     imageView.clipsToBounds = YES; // do not display the image outside of view, if it has different aspect ratio
     imageView.contentMode = UIViewContentModeScaleAspectFill;
     
+    //Load switch states by kid name
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *switchState = [defaults objectForKey:[NSString stringWithFormat:@"%@SwitchState", kid.kidName]];
-    NSLog(@"%@'s switch state: %@",kid.kidName, switchState);
     
-    //Add dark overlay
-    UIView *overlay = [[UIView alloc] initWithFrame:imageView.frame];
-    [overlay setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7]];
-    [imageView addSubview:overlay];
+    //Add overlay according to monitoring status
+    [self AddImageOverlay:switchState to:imageView];
 
     [cell.contentView addSubview:imageView];
     return cell;
@@ -120,13 +133,6 @@ static NSString * const reuseIdentifier = @"CollectionCell";
 
 - (void)backButtonPressed:(double)monitorStatus withKidIndex:(double)index
 {
-    for (Kid *kid in self.kids.KidsArray) {
-
-//        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//        NSString *switchState = [defaults objectForKey:[NSString stringWithFormat:@"%@SwitchState", kid.kidName]];
-//        NSLog(@"%@'s switch state: %@",kid.kidName, switchState);
-    }
-    
     [self.collectionView reloadData];
 }
 

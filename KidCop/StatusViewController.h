@@ -39,8 +39,6 @@
 
 @property (strong, nonatomic) WeatherInspector *weatherRequester;
 
-- (IBAction)saveSwitchState:(id)sender;
-
 @property NSInteger temp;
 
 @end

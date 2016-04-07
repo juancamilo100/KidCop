@@ -12,9 +12,6 @@
 // 1. Add an import
 #import <EstimoteSDK/EstimoteSDK.h>
 
-
-//const NSString *kWundergroundKey = @"5afb7496f4a7ee7f";
-
 // 2. Add the ESTTriggerManagerDelegate protocol
 @interface StatusViewController () <ESTTriggerManagerDelegate, ESTNearableManagerDelegate, CLLocationManagerDelegate>
 
