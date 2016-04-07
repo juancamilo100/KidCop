@@ -39,6 +39,7 @@
     self.kidImageView.clipsToBounds = YES;
     
     self.kidNameLabel.text = [NSString stringWithFormat:@"%@", self.kidName];
+    self.alertHasBeenPublished = false;
     
     //Make the label's corners round
     [[self.kidStatusLabel layer] setCornerRadius:8];
@@ -103,7 +104,7 @@
         
     } else {
         [self stopMonitoringKid];
-        self.monitoringStatusLabel.text = [NSString stringWithFormat:@"Not monitoring %@", self.kidName];
+        self.monitoringStatusLabel.text = [NSString stringWithFormat:@"Tap on switch to start monitoring %@", self.kidName];
         
         [defaults setObject:@"OFF" forKey:[NSString stringWithFormat:@"%@SwitchState", self.kidName]];
     }
@@ -133,51 +134,59 @@
     double tempDelta = fabs([self.weatherRequester.outsideTemp doubleValue] - beaconTempInFahrenheit);
     if(tempDelta > 15)
     {
-        NSString *kidWhereabouts = @"Inside";
+        NSString *kidWhereabouts = @"INSIDE";
         return kidWhereabouts;
     }
     else
     {
-        NSString *kidWhereabouts = @"Outside!";
+        NSString *kidWhereabouts = @"OUTSIDE!";
         return kidWhereabouts;
     }
 }
 
 - (NSString *) KidMotionStatus:(ESTNearable *)nearable {
     if (nearable.isMoving) {
-        return @"moving";
+        return @"MOVING";
     }
     else {
-        return @"not moving";
+        return @"NOT MOVING";
     }
 }
 
 - (void)publishAlert:(NSString *) alertName withMessage: (NSString *)message {
-    UIAlertController *alertController = [UIAlertController
-                                          alertControllerWithTitle:alertName
-                                          message:message
-                                          preferredStyle:UIAlertControllerStyleAlert];
+//    UIAlertController *alertController = [UIAlertController
+//                                          alertControllerWithTitle:alertName
+//                                          message:message
+//                                          preferredStyle:UIAlertControllerStyleAlert];
+//    
+//    UIAlertAction *okAction = [UIAlertAction
+//                               actionWithTitle:NSLocalizedString(@"OK", @"OK action")
+//                               style:UIAlertActionStyleDefault
+//                               handler:^(UIAlertAction *action)
+//                               {
+//                                   NSLog(@"OK action");
+//                               }];
+//    
+//    UIAlertAction *cancelAction = [UIAlertAction
+//                                   actionWithTitle:NSLocalizedString(@"Stop Monitoring", @"Cancel action")
+//                                   style:UIAlertActionStyleCancel
+//                                   handler:^(UIAlertAction *action)
+//                                   {
+//                                       self.monitoringSwitch.on = false;
+//                                       [self stopMonitoringKid];
+//                                   }];
+//    
+//    [alertController addAction:cancelAction];
+//    [alertController addAction:okAction];
+//    
+//    [self presentViewController:alertController animated:YES completion:nil];
     
-    UIAlertAction *okAction = [UIAlertAction
-                               actionWithTitle:NSLocalizedString(@"OK", @"OK action")
-                               style:UIAlertActionStyleDefault
-                               handler:^(UIAlertAction *action)
-                               {
-                                   NSLog(@"OK action");
-                               }];
-    
-    UIAlertAction *cancelAction = [UIAlertAction
-                                   actionWithTitle:NSLocalizedString(@"Stop Monitoring", @"Cancel action")
-                                   style:UIAlertActionStyleCancel
-                                   handler:^(UIAlertAction *action)
-                                   {
-                                       [self stopMonitoringKid];
-                                   }];
-    
-    [alertController addAction:cancelAction];
-    [alertController addAction:okAction];
-    
-    [self presentViewController:alertController animated:YES completion:nil];
+    UILocalNotification* localNotification = [[UILocalNotification alloc] init];
+    localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:1];
+    localNotification.alertBody = message;
+    localNotification.timeZone = [NSTimeZone defaultTimeZone];
+//    localNotification.soundName = UILocalNotificationDefaultSoundName;//@"PhoneVibrating.mp3";
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 }
 
 - (void)nearableManager:(ESTNearableManager *)manager didRangeNearable:(ESTNearable *)nearable
@@ -185,19 +194,21 @@
     double beaconTempInFahrenheit = (nearable.temperature * 1.8) + 32;
     self.tempLabel.text = [NSString stringWithFormat:@"%.1f°F", beaconTempInFahrenheit];
     
-    
     NSString *message;
     if(nearable.zone > 2)
     {
-        NSString *alertTitle = @"Alert!";
-        [self publishAlert:alertTitle withMessage:message];
-        
-        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-        AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
-        
-        self.kidStatusLabel.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5f];
         message = [NSString stringWithFormat:@"%@ ran away and is %@, probably %@", self.kidName, [self KidMotionStatus:nearable], [self KidWhereabouts:beaconTempInFahrenheit]];
         self.kidStatusLabel.text = message;
+        
+        if (!self.alertHasBeenPublished) {
+            NSString *alertTitle = @"Kid is Gone!";
+            [self publishAlert:alertTitle withMessage:message];
+            self.alertHasBeenPublished = true;
+        }
+        
+//        AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
+        
+        self.kidStatusLabel.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5f];
     }
     else
     {
@@ -206,6 +217,7 @@
         message = self.kidName;
         message = [message stringByAppendingString:@" is with you."];
         self.kidStatusLabel.text = message;
+        self.alertHasBeenPublished = false;
     }
 }
 

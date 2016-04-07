@@ -36,6 +36,7 @@
 @property (strong, nonatomic) NSString *kidName;
 @property (strong, nonatomic) NSString *kidImage;
 @property double kidIndex;
+@property BOOL alertHasBeenPublished;
 
 @property (strong, nonatomic) WeatherInspector *weatherRequester;
 
