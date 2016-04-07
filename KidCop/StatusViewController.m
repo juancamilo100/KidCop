@@ -245,6 +245,7 @@
     self.outsideTempLabel.text = [NSString stringWithFormat:@"%.1f°F", [self.weatherRequester.outsideTemp doubleValue]];
 }
 
+//Perform delegate method in target view
 -(void) viewWillDisappear:(BOOL)animated {
     if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
         NSLog(@"back button was pressed");

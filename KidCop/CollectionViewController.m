@@ -45,6 +45,10 @@ static NSString * const reuseIdentifier = @"CollectionCell";
     
     self.kids = [[KidDataBase alloc] initFromDatabase:kidsRemoteData];
     
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *switchState = [defaults objectForKey:@"DianaSwitchState"];
+    NSLog(@"Switch state: %@", switchState);
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -91,17 +95,17 @@ static NSString * const reuseIdentifier = @"CollectionCell";
     imageView.frame = cell.bounds; // set the frame of the UIImageView
     imageView.clipsToBounds = YES; // do not display the image outside of view, if it has different aspect ratio
     imageView.contentMode = UIViewContentModeScaleAspectFill;
-    [imageView setTintColor:[UIColor blackColor]];
     
-//    UIImageView *darkOverlay = [[UIImageView alloc] initWithFrame:imageView.frame];
-//    darkOverlay.frame = cell.bounds;
-//    darkOverlay.clipsToBounds = YES;
-//    [darkOverlay setTintColor:[UIColor blackColor]];
-    [cell.contentView addSubview:imageView];
-//    [cell.contentView addSubview:darkOverlay];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *switchState = [defaults objectForKey:[NSString stringWithFormat:@"%@SwitchState", kid.kidName]];
+    NSLog(@"%@'s switch state: %@",kid.kidName, switchState);
     
+    //Add dark overlay
+    UIView *overlay = [[UIView alloc] initWithFrame:imageView.frame];
+    [overlay setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7]];
+    [imageView addSubview:overlay];
 
-    
+    [cell.contentView addSubview:imageView];
     return cell;
 }
 
@@ -116,7 +120,14 @@ static NSString * const reuseIdentifier = @"CollectionCell";
 
 - (void)backButtonPressed:(double)monitorStatus withKidIndex:(double)index
 {
-    NSLog(@"index = %.1f, monitorStatus = %.1f", monitorStatus, index);
+    for (Kid *kid in self.kids.KidsArray) {
+
+//        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//        NSString *switchState = [defaults objectForKey:[NSString stringWithFormat:@"%@SwitchState", kid.kidName]];
+//        NSLog(@"%@'s switch state: %@",kid.kidName, switchState);
+    }
+    
+    [self.collectionView reloadData];
 }
 
 @end
