@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface AppDelegate ()
 
@@ -17,11 +18,21 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    [launchOptions valueForKey:UIApplicationLaunchOptionsLocalNotificationKey];
-    [[UIApplication sharedApplication]registerUserNotificationSettings:
-					[UIUserNotificationSettings
-                     settingsForTypes:UIUserNotificationTypeAlert
-                     categories:nil]];
+    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+        
+//    [launchOptions valueForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+//    [[UIApplication sharedApplication]registerUserNotificationSettings:
+//					[UIUserNotificationSettings
+//                     settingsForTypes: UIUserNotificationTypeAlert | UIUserNotificationTypeSound
+//                     categories:nil]];
+        if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+            [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
+        }
+    }
+    
+//    if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)]){
+//        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
+//    }
     return YES;
 }
 
@@ -33,6 +44,14 @@
 //    localNotification.alertAction = @"I'll get it!";
 //    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
     
+    UIApplicationState state = [application applicationState];
+    if (state == UIApplicationStateActive) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Kid is gone!"
+                                                        message:notification.alertBody
+                                                       delegate:self cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

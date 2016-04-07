@@ -11,7 +11,16 @@
 #import "Kid.h"
 #import "WeatherInspector.h"
 
+
+@protocol MonitorStatusDelegate
+
+- (void)backButtonPressed:(double)monitorStatus withKidIndex:(double)index;
+
+@end
+
 @interface StatusViewController : UIViewController
+
+@property (nonatomic, weak) id <MonitorStatusDelegate> delegate;
 
 @property (weak, nonatomic) IBOutlet UILabel *tempLabel;
 @property (weak, nonatomic) IBOutlet UILabel *motionLabel;
@@ -26,11 +35,10 @@
 @property (strong, nonatomic) NSString *stickerId;
 @property (strong, nonatomic) NSString *kidName;
 @property (strong, nonatomic) NSString *kidImage;
+@property double kidIndex;
+@property BOOL alertHasBeenPublished;
 
 @property (strong, nonatomic) WeatherInspector *weatherRequester;
-
-- (IBAction)saveSwitchState:(id)sender;
-
 
 @property NSInteger temp;
 

@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "KidDataBase.h"
+#import "StatusViewController.h"
 
-@interface CollectionViewController : UICollectionViewController
+@interface CollectionViewController : UICollectionViewController <MonitorStatusDelegate>
 
 //@property (strong, nonatomic) IBOutlet UILabel *textLabel;
 @property (strong, nonatomic) KidDataBase *kids;
