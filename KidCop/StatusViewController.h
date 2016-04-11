@@ -42,5 +42,7 @@
 
 @property NSInteger temp;
 
+- (void) AcceptAction;
+
 @end
 

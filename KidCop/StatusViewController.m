@@ -7,6 +7,7 @@
 //
 
 #import "StatusViewController.h"
+#import "AppDelegate.h"
 #import <CoreLocation/CoreLocation.h>
 #import <AudioToolbox/AudioToolbox.h>
 // 1. Add an import
@@ -20,7 +21,6 @@
 // 3. Add a property to hold the trigger manager
 @property (nonatomic) ESTTriggerManager *triggerManager;
 
-
 //Add nearable manager
 @property (nonatomic, strong) ESTNearableManager *nearableManager;
 @end
@@ -29,6 +29,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //Allow AppDelegate to use methods in this view controller
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.statusViewController = self;
     
     //Initialize Weather Inspector
     self.weatherRequester = [[WeatherInspector alloc] init];
@@ -182,10 +186,11 @@
 //    [self presentViewController:alertController animated:YES completion:nil];
     
     UILocalNotification* localNotification = [[UILocalNotification alloc] init];
-    localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:1];
+    localNotification.fireDate = [NSDate date];//[NSDate dateWithTimeIntervalSinceNow:1];
     localNotification.alertBody = message;
     localNotification.timeZone = [NSTimeZone defaultTimeZone];
     localNotification.soundName = UILocalNotificationDefaultSoundName;
+    localNotification.category = @"KidAway";
 //    localNotification.soundName = UILocalNotificationDefaultSoundName;//@"PhoneVibrating.mp3";
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 }
@@ -263,6 +268,12 @@
         [self.navigationController popViewControllerAnimated:NO];
     }
     [super viewWillDisappear:animated];
+}
+
+#pragma mark Methods For Notification Actions
+
+- (void) AcceptAction {
+    NSLog(@"Accept Action has been invoked");
 }
 
 @end

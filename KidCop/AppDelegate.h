@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StatusViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
+@property (weak, nonatomic) StatusViewController *statusViewController;
 
 @end
 

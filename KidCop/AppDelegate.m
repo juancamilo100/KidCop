@@ -34,31 +34,68 @@
 //        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
 //    }
     
-    UIUserNotificationType types = (UIUserNotificationType) (UIUserNotificationTypeBadge |
-                                                             UIUserNotificationTypeSound | UIUserNotificationTypeAlert);
+//    UIUserNotificationType types = (UIUserNotificationType) (UIUserNotificationTypeBadge |
+//                                                             UIUserNotificationTypeSound | UIUserNotificationTypeAlert);
+//    
+//    UIUserNotificationSettings *mySettings =
+//    [UIUserNotificationSettings settingsForTypes:types categories:nil];
+//    
+//    [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
     
-    UIUserNotificationSettings *mySettings =
-    [UIUserNotificationSettings settingsForTypes:types categories:nil];
+    //Notification Actions and Category
     
-    [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
+    UIMutableUserNotificationAction *notificationAction1 = [[UIMutableUserNotificationAction alloc] init];
+    notificationAction1.identifier = @"Accept";
+    notificationAction1.title = @"OK";
+    notificationAction1.activationMode = UIUserNotificationActivationModeBackground;
+    notificationAction1.destructive = NO;
+    notificationAction1.authenticationRequired = NO;
+    
+    UIMutableUserNotificationAction *notificationAction2 = [[UIMutableUserNotificationAction alloc] init];
+    notificationAction2.identifier = @"Stop";
+    notificationAction2.title = @"Stop Monitoring";
+    notificationAction2.activationMode = UIUserNotificationActivationModeBackground;
+    notificationAction2.destructive = YES;
+    notificationAction2.authenticationRequired = NO;
+    
+    UIMutableUserNotificationCategory *notificationCategory = [[UIMutableUserNotificationCategory alloc] init];
+    notificationCategory.identifier = @"KidAway";
+    [notificationCategory setActions:@[notificationAction1,notificationAction2] forContext:UIUserNotificationActionContextDefault];
+//    [notificationCategory setActions:@[notificationAction1,notificationAction2] forContext:UIUserNotificationActionContextMinimal];
+    
+    NSSet *categories = [NSSet setWithObjects:notificationCategory, nil];
+    
+    UIUserNotificationType notificationType = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+    UIUserNotificationSettings *notificationSettings = [UIUserNotificationSettings settingsForTypes:notificationType categories:categories];
+    
+    [[UIApplication sharedApplication] registerUserNotificationSettings:notificationSettings];
+    
     return YES;
 }
 
 -(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
     
-//    UILocalNotification* localNotification = [[UILocalNotification alloc] init];
-//    localNotification.fireDate = [NSDate date];
-//    localNotification.alertBody = @"The bastard ran away!!!";
-//    localNotification.alertAction = @"I'll get it!";
-//    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    UILocalNotification* localNotification = [[UILocalNotification alloc] init];
+    localNotification.fireDate = [NSDate date];
+    localNotification.alertBody = @"The bastard ran away!!!";
+    localNotification.alertAction = @"I'll get it!";
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
     
     UIApplicationState state = [application applicationState];
-    if (state == UIApplicationStateActive) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Kid is gone!"
-                                                        message:notification.alertBody
-                                                       delegate:self cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
+//    if (state == UIApplicationStateActive) {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Kid is gone!"
+//                                                        message:notification.alertBody
+//                                                       delegate:self cancelButtonTitle:@"OK"
+//                                              otherButtonTitles:nil];
+//        [alert show];
+//    }
+}
+
+-(void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)())completionHandler {
+    
+    if([identifier isEqualToString:@"Accept"])
+    {
+        [self.statusViewController AcceptAction];
     }
 }
 

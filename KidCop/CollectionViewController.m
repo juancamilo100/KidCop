@@ -129,7 +129,7 @@ static NSString * const reuseIdentifier = @"CollectionCell";
     return CGSizeMake(picDimension, picDimension);
 }
 
-#pragma mark Status View Delegate Method
+#pragma mark Status View Controller Delegate Method
 
 - (void)backButtonPressed:(double)monitorStatus withKidIndex:(double)index
 {
